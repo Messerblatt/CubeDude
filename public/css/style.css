@@ -455,7 +455,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button
     width: var(--icon-dim);
     height: var(--icon-dim);
     display: inline-block;
-    background-image: url("HUD/folder_icon.svg");
+    background-image: url("/HUD/folder_icon.svg");
     background-repeat: no-repeat;
     background-size: contain;
     margin-inline-end: 15px;

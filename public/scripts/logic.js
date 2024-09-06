@@ -1,26 +1,29 @@
- // import { parseFile } from 'music-metadata';
-
+// import { parseFile } from 'music-metadata';
+import metadata from "/data/metadata.js";
 window.trigger = ($(window).width() < 968) ? "touchstart" : "click";
-window.rotateIndex = 0;
+window.rotateIndex = 0;0
 
 window.song = new Pz.Sound()
-var folder;
+// var folder;
 
-KEY_SPACE = 32;
-KEY_ESCAPE = 27;
-KEY_f = 70;
-KEY_d = 68;
-KEY_r = 82;
-KEY_e = 69;
-KEY_t = 84;
-KEY_l = 76;
-KEY_i = 73;
+var KEY_SPACE = 32;
+var KEY_ESCAPE = 27;
+var KEY_f = 70;
+var KEY_d = 68;
+var KEY_r = 82;
+var KEY_e = 69;
+var KEY_t = 84;
+var KEY_l = 76;
+var KEY_i = 73;
+
+var analyzer = Pz.context.createAnalyser();  
 
 // Get the depth of an object
 const objectDepth = (o) =>
   Object (o) === o ? 1 + Math.max(-1, ... Object.values(o).map(objectDepth)) : 0
 
 $(document).ready(function() {
+  console.log("$")
   populate_HTML();
   register_songs();
   // register_folders();
@@ -35,18 +38,18 @@ $(document).ready(function() {
 function populate_HTML() {
   //init_loading_screen();
   populate_info_menu();
-  populate_back_home();
+  // populate_back_home();
 
-  $.getJSON("scripts/folders.json", function(data) {
+  $.getJSON("/scripts/folders.json", function(data) {
     // folders = data
-    items = []
+    var items = []
     
     $.each(data, function(key, val) {
-      song_name = key.split(".")[0];
-      html = ""
-      depth = objectDepth(val)  
+      var song_name = key.split(".")[0];
+      var html = ""
+      var depth = objectDepth(val)  
       if (depth == 1) {
-        html += `<div class="file song" target="audio/${key}" duration="${val['duration']}">${song_name}</div>`;
+        html += `<div class="file song" target="/audio/${key}" duration="${val['duration']}">${song_name}</div>`;
       } else {
         html += `<div class="folder">${song_name}`;
         html += `<div class="hidden subfolder">`
@@ -71,7 +74,7 @@ function init_loading_screen() {
 }
 
 function populate_info_menu() {
-  info_menu = $(".info_menu_container")
+  var info_menu = $(".info_menu_container")
   info_menu.load("info.html")
   $(window).keydown(function(e) {
     switch(e.which) {
@@ -100,7 +103,7 @@ function register_songs() {
     event.stopPropagation();
     // select_song($(this));
     window.song.stop();
-    songname = $(this).attr("target");
+    var songname = $(this).attr("target");
     window.song = new Pz.Sound(songname, function() {
       window.song.attack = 0;
       window.song.loop = true;
@@ -116,7 +119,7 @@ function register_songs() {
     $(".song").removeClass("active_song");
     $(this).addClass("active_song");
 
-    title = $("#song").attr(songname);
+    var title = $("#song").attr(songname);
     $("#title").html(songname.split("/")[1]);
     $('.back_home_container').get(0).scrollIntoView();
   })
@@ -154,7 +157,7 @@ function fx_load() {
     window.trigger,
     ".flanger, .distortion, .reverb, .delay, .tremolo, .lowPassFilter",
     function() {
-      fx = $(this).attr("fx")
+      var fx = $(this).attr("fx")
       if (!window.effects[fx]["set"]) {
         window.song.addEffect(window.effects[fx]["ref"])
         window.effects[fx]["set"] = true
@@ -197,22 +200,20 @@ function fx_keybindings() {
 }
 
 function setup_viz() {
-  canvas = $(".a_viz")[0]
-  console.log(canvas)
+  var canvas = $(".a_viz")[0]
   canvas.width = $(window).width();
   canvas.height = 250;
-  canvasCtx = canvas.getContext("2d");
+  var canvasCtx = canvas.getContext("2d");
   canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-
-  analyzer = Pz.context.createAnalyser();
-  bufferLength = analyzer.frequencyBinCount;
+  
+  var bufferLength = analyzer.frequencyBinCount;
   window.song.connect(analyzer);
-  data = new Float32Array(bufferLength);
+  var data = new Float32Array(bufferLength);
   
   function draw() {
 
     requestAnimationFrame(draw);
-    analyzer.getFloatFrequencyData(data)
+    analyzer.getFloatFrequencyData(data);
     canvasCtx.clearRect(0,0, canvas.width, canvas.height)
 
     const barWidth = (canvas.width / bufferLength) * 2.5;
@@ -253,7 +254,7 @@ function setup_mobile() {
 }
 
 function playPause() {
-  underline = $(".playPause").siblings(".underline")
+  var underline = $(".playPause").siblings(".underline")
   if (window.song.paused) {
     window.song.play();
     underline.addClass("border_bottom_red")
@@ -266,63 +267,12 @@ function playPause() {
 }
 
 function extract_metadata(songname) {
-  alert(songname)
-  $.getJSON("../data/metadata.json", function(data) {
-    lookup = data[songname]
-    console.log("Metadata;", lookup)
-  })
-
-  songname = songname.split("/")[1]
-  // songname = songname.substring(0, songname.lastIndexOf('.')) || songname
+  var song_data = metadata[songname]
+  $("#duration").html(song_data['duration'] + " Sec")
+  $("#artist").html(song_data['artist']);
+  $("#genre").html(song_data['genre']);
+  $("#genre_bottom").html(song_data['genre']);
+  $("#bpm").html(song_data['BPM']);
+  $("#sample_rate").html(song_data['sample_rate']);
   
-  if (metadata === undefined) {
-    $("#duration").html("")
-    $("#artist").html("");
-    $("#genre").html("");
-    $("#genre_bottom").html("");
-    $("#bpm").html("");
-    $("#sample_rate").html("");
-  } else {
-    $("#duration").html(metadata['duration'] + " Sec")
-    $("#artist").html(metadata['artist']);
-    $("#genre").html(metadata['genre']);
-    $("#genre_bottom").html(metadata['genre']);
-    $("#bpm").html(metadata['BPM']);
-    $("#sample_rate").html(metadata['sample_rate']);
-  }
 }
-
-function findX(obj, targetKey) {
-  let result = null;
-
-  function search(item) {
-      if (typeof item === 'object' && item !== null) {
-          for (let key in item) {
-              if (item.hasOwnProperty(key)) {
-                  if (key === targetKey) {
-                      result = item[key];
-                      return;
-                  }
-                  search(item[key]); // Recursive call to search deeper
-              }
-          }
-      }
-  }
-
-  search(obj);
-  return result;
-}
-
-/*function findX(object, item) { 
-  var val = object[item];
-  if (val !== undefined) {
-    return val;
-  }
-  for (var name in object) {
-    var result = findX(object[name]);
-    if (result !== undefined) {
-      return result;
-    }
-  }
-  return undefined;
-}*/

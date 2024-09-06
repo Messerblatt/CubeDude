@@ -100,7 +100,7 @@ def get_folder_structure(path):
 
   folder_structure = {}
   for entry in os.listdir(path):
-      entry_path = os.path.join(path, entry)
+      entry_path = path + "/" + entry
       
       if os.path.isdir(entry_path):
           # If entry is a dict, recursively call the function and add the result to the dictionary
@@ -112,7 +112,7 @@ def get_folder_structure(path):
   if VERBOSITY >= 1:
     print("get_folder_structure(): ", folder_structure)
   
-  with open("scripts/folders.json", "w") as f:
+  with open("folders.json", "w") as f:
     json.dump(folder_structure, f, indent=4)
   return folder_structure
 
@@ -125,7 +125,7 @@ def find_audio_files(directory):
           # Check for valid audio file extensions
           if any(file.lower().endswith(ext) for ext in AUDIO_EXTENSIONS):
               # Appends the **FULL** path to the list
-              songs.append(os.path.join(root, file))
+              songs.append(root + "/" + file)
   logger.info(f' {now()}: {len(songs)} songs found')
   return songs
 
@@ -136,7 +136,7 @@ def create_csv_meta():
     metadata = get_metadata(song)
     metadata_json[song] = metadata
 
-  export_path = os.path.join(config['DATA_DIR'], "metadata.json")
+  export_path = config['DATA_DIR'] + "/" + "metadata.json"
   with open(export_path, "w") as f:
     json.dump(metadata_json, f, indent=4)
   pprint(songs)
@@ -151,8 +151,7 @@ if __name__ == "__main__":
   folder_structure = get_folder_structure(config['AUDIO_DIR'])
   # pprint(folder_structure)
   logger.info(f' {now()}: folder_structure established')
-  folder = os.listdir("audio")
-
+  
   create_csv_meta()
   
   logger.info(f' {now()}: Finished')
