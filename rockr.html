@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="scripts/jquery.js"></script>
+  <script src="scripts/pizzicato_min.js"></script>
+  <script src="scripts/effects.js"></script>
+  <script src="scripts/logic.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="utils.css">
+  <link rel="stylesheet" href="fonts.css">
+  
+  <meta property="og:title" content="Rockr" />
+  <meta property="og:description" content="A webbrowser-based Audio-Player and Special Effects like Flanger and Reverb and stuff" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.messerblatt.com/rockr/rockr.html/">
+  <meta property="og:image" content="https://www.messerblatt.com/assets/images/icons/pic.jpg" />
+  <script type="application/ld+json">
+  {
+     "@context":"https://schema.org",
+     "@graph":[
+        {
+           "@type":"WebPage",
+           "@id":"https://www.messerblatt.com/rockr/rockr.html",
+           "url":"https://www.messerblatt.com/rockr/rockr.html",
+           "name":"Rock",
+           "isPartOf":{
+              "@id":"https://www.messerblatt.com"
+           },
+           "primaryImageOfPage":{
+              "@id":"https://www.messerblatt.com/assets/icons/pic.jpg"
+           },
+           "image":{
+              "@id":"https://www.messerblatt.com/assets/icons/pic.jpg"
+           },
+           "thumbnailUrl":"https://www.messerblatt.com/assets/icons/pic.jpg",
+           "datePublished":"2024-04-02T06:39:09+00:00",
+           "dateModified":"2024-05 -02T10:50:35+00:00",
+           "description":"A Loop station for the webbrowser",
+           
+           "inLanguage":"en-GB",
+           "potentialAction":[
+              {
+                 "@type":"ViewAction",
+                 "target":[
+                    "https://www.messerblatt.com/rockr/rockr.html#playPause"
+                 ]
+              }
+           ]
+        },
+        {
+           "@type":"ImageObject",
+           "inLanguage":"en-GB",
+           "@id":"https://www.messerblatt.com/rockr/imgs/apasaric.jpg",
+           "url":"https://www.messerblatt.com/rockr/imgs/apasaric.jpg",
+           "contentUrl":"https://www.messerblatt.com/rockr/imgs/apasaric.jpg",
+           "width":5472,
+           "height":3648,
+           "caption":"Wallpaper art by Apasaric"
+        },
+        {
+           "@type":"WebSite",
+           "@id":"https://www.messerblatt.com/rockr/rockr.html",
+           "url":"https://www.messerblatt.com/rockr/rockr.html",
+           "name":"messerblatt.com",
+           "description":"Browse tracks and enjoy audio effects.",
+           "publisher":{
+              "@id":"https://www.messerblatt.com/about.html"
+           },
+           "inLanguage":"en-GB"
+        },
+        {
+           "@type":"Organization",
+           "@id":"https://www.messerblatt.com/",
+           "name":"Webdesign",
+           "url":"https://www.messerblatt.com/",
+           "logo":{
+              "@type":"ImageObject",
+              "inLanguage":"en-GB",
+              "@id":"https://www.messerblatt.com/assets/icons/M.png",
+              "url":"https://www.messerblatt.com/assets/icons/M.png",
+              "contentUrl":"https://www.messerblatt.com/assets/icons/M.png",
+              "width":1890,
+              "height":435,
+              "caption":"Messerblat Webdesign | Markus Meyer"
+           },
+           "image":{
+              "@id":"https://www.messerblatt.com/assets/icons/M.png"
+           },
+           "sameAs":[
+              "https://www.artstation.com/os_30006",
+              "https://medium.com/@messerblatt"
+           ]
+        }]}</script>
+
+  <!-- <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" /> -->
+  <title>Rockr</title>
+</head>
+<body>
+<!--  <div class="loading_screen">
+    <div class="spinner abs_centered"></div>
+  </div> -->
+
+  <div class="back_home_container"></div>
+  <object class="rockr_header" data="HUD/header.svg" type="image/svg+xml"></object>
+
+  <div class="hud_main">
+    <h1 id="title">Title</h1>
+    <object data="HUD/future_edge_topRight.svg" type="image/svg+xml" id="future_edge_topRight"></object>
+    
+    <object data="HUD/future_edge_topRight2.svg" type="image/svg+xml" id="future_edge_topRight2"></object>
+    <div class="rockr_footer glas">
+      <div class="flex_row mg_bottom5">
+        <div>Duration: </div>    
+        <div id="duration" class="fx_button"></div>
+      </div>
+  
+      <div class="flex_row mg_bottom5">
+        <div>Artist: </div>
+        <div id="artist" class="fx_button"></div>
+      </div>
+      
+      <div class="flex_row mg_bottom5">
+        <div>Genre: </div>
+        <div id="genre_bottom" class="fx_button"></div>
+      </div>
+      
+      <div class="flex_row mg_bottom5">
+        <div>BPM: </div>
+        <div id="bpm" class="fx_button"></div>
+      </div>
+      
+      <div class="flex_row mg_bottom5">
+        <div>Sample Rate:</div>
+        <div id="sample_rate" class="fx_button"></div>
+      </div>
+      
+      <div class="fx_button future_kante text_centered pos_bottom_right"> <div class="underlined">I</div>nfo</div>
+    </div>
+
+
+  </div>
+
+  <object data="HUD/future_edge_left.svg" type="image/svg+xml" id="future_edge_left"></object>
+  <div class="sidebar glas">
+  <object class="tracklist_header" data="HUD/tracklist_header.svg" type="image/svg+xml"></object>
+    <!-- Filled by js-->
+  </div>
+ 
+  <div class="info_menu_container">
+    <!-- Filled by js-->
+  </div>
+
+<div class="grid_container">
+  <div>
+    <div class="playPause fx_button text_centered future_kante" fx="playPause">Play</div>
+    <div class="underline"></div>
+  </div>
+  
+  <div>
+    <div class="flanger fx_button text_centered future_kante" fx="flanger"><div class="underlined">F</div>langer</div>
+    <div class="underline"> </div>
+  </div>
+
+  <div>
+    <div class="distortion fx_button text_centered future_kante" fx="distortion"><div class="underlined">D</div>istortion</div>
+    <div class="underline"> </div>
+  </div>
+
+  <div>
+    <div class="reverb fx_button text_centered future_kante" fx="reverb"><div class="underlined">R</div>everb</div>
+    <div class="underline"></div>
+  </div>
+
+  <div>
+    <div class="delay fx_button text_centered future_kante" fx="delay">D<div class="underlined">e</div>lay</div>
+    <div class="underline"></div>
+  </div>
+
+  <div>
+    <div class="tremolo fx_button text_centered future_kante" fx="tremolo"><div class="underlined">T</div>remolo</div>
+    <div class="underline"></div>
+  </div>
+
+  <div>
+    <div class="lowPassFilter fx_button text_centered future_kante" fx="lowPassFilter"><div class="underlined">L</div>owPassFilter</div>
+    <div class="underline"></div>
+  </div>
+</div>
+<div class="tracks_container">
+  
+</div>
+  <!-- <div class="current_time right_tab font-larger future_kante_open_right padding_px"></div> -->  
+  <!-- <div class="progress_bar absolute_bottom"></div> -->
+
+  <canvas class="a_viz"></canvas>  
+
+  <div class="file_explorer"></div>
+</body>
+</html>
