@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'Terano';
+  src: url('../fonts/Terano/TeranoRegular.woff2') format('woff2'),
+       url('../fonts/Terano/TeranoRegular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Psilograph";
+  src: url("/fonts/Psilograph/Psilograph-Regular_1.eot");
+  /*src: url("webfont.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Psilograph/Psilograph-Regular_1.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+       url("../fonts/Psilograph/Psilograph-Regular_1.woff") format("woff"), /* Modern Browsers */
+       url("../fonts/Psilograph/Psilograph-Regular_1.ttf")  format("truetype"), /* Safari, Android, iOS */
+       url("../fonts/Psilograph/Psilograph-Regular_1.svg#svgFontName") format("svg"); /* Legacy iOS */
+  font-weight: lighter;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('../fonts/SourceCodePro/SourceCodePro-Regular.woff2') format('woff2'),
+      url('../fonts/SourceCodePro/SourceCodePro-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'orbitronregular';
+  src: url('../fonts/orbitron/orbitron-variablefont_wght-webfont.woff2') format('woff2'),
+       url('../fonts/orbitron/orbitron-variablefont_wght-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.altfont {
+  font-family: "orbitronregular", "Source Code Pro", sans-serif;
+}

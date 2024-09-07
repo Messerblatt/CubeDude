@@ -1,0 +1,234 @@
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-ExtraBold.eot');
+    src: url('Psilograph-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-ExtraBold.woff2') format('woff2'),
+        url('Psilograph-ExtraBold.woff') format('woff'),
+        url('Psilograph-ExtraBold.ttf') format('truetype'),
+        url('Psilograph-ExtraBold.svg#Psilograph-ExtraBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph ExtBd';
+    src: url('Psilograph-ExtraBold_1.eot');
+    src: url('Psilograph-ExtraBold_1.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-ExtraBold_1.woff2') format('woff2'),
+        url('Psilograph-ExtraBold_1.woff') format('woff'),
+        url('Psilograph-ExtraBold_1.ttf') format('truetype'),
+        url('Psilograph-ExtraBold_1.svg#Psilograph-ExtraBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-ExtraLight.eot');
+    src: url('Psilograph-ExtraLight.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-ExtraLight.woff2') format('woff2'),
+        url('Psilograph-ExtraLight.woff') format('woff'),
+        url('Psilograph-ExtraLight.ttf') format('truetype'),
+        url('Psilograph-ExtraLight.svg#Psilograph-ExtraLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-Bold.eot');
+    src: url('Psilograph-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Bold.woff2') format('woff2'),
+        url('Psilograph-Bold.woff') format('woff'),
+        url('Psilograph-Bold.ttf') format('truetype'),
+        url('Psilograph-Bold.svg#Psilograph-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-Black.eot');
+    src: url('Psilograph-Black.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Black.woff2') format('woff2'),
+        url('Psilograph-Black.woff') format('woff'),
+        url('Psilograph-Black.ttf') format('truetype'),
+        url('Psilograph-Black.svg#Psilograph-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-Black_1.eot');
+    src: url('Psilograph-Black_1.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Black_1.woff2') format('woff2'),
+        url('Psilograph-Black_1.woff') format('woff'),
+        url('Psilograph-Black_1.ttf') format('truetype'),
+        url('Psilograph-Black_1.svg#Psilograph-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-Bold_1.eot');
+    src: url('Psilograph-Bold_1.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Bold_1.woff2') format('woff2'),
+        url('Psilograph-Bold_1.woff') format('woff'),
+        url('Psilograph-Bold_1.ttf') format('truetype'),
+        url('Psilograph-Bold_1.svg#Psilograph-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-SemiBold.eot');
+    src: url('Psilograph-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-SemiBold.woff2') format('woff2'),
+        url('Psilograph-SemiBold.woff') format('woff'),
+        url('Psilograph-SemiBold.ttf') format('truetype'),
+        url('Psilograph-SemiBold.svg#Psilograph-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph ExtLt';
+    src: url('Psilograph-ExtraLight_1.eot');
+    src: url('Psilograph-ExtraLight_1.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-ExtraLight_1.woff2') format('woff2'),
+        url('Psilograph-ExtraLight_1.woff') format('woff'),
+        url('Psilograph-ExtraLight_1.ttf') format('truetype'),
+        url('Psilograph-ExtraLight_1.svg#Psilograph-ExtraLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-Regular.eot');
+    src: url('Psilograph-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Regular.woff2') format('woff2'),
+        url('Psilograph-Regular.woff') format('woff'),
+        url('Psilograph-Regular.ttf') format('truetype'),
+        url('Psilograph-Regular.svg#Psilograph-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-Medium.eot');
+    src: url('Psilograph-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Medium.woff2') format('woff2'),
+        url('Psilograph-Medium.woff') format('woff'),
+        url('Psilograph-Medium.ttf') format('truetype'),
+        url('Psilograph-Medium.svg#Psilograph-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-Regular_1.eot');
+    src: url('Psilograph-Regular_1.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Regular_1.woff2') format('woff2'),
+        url('Psilograph-Regular_1.woff') format('woff'),
+        url('Psilograph-Regular_1.ttf') format('truetype'),
+        url('Psilograph-Regular_1.svg#Psilograph-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph Med';
+    src: url('Psilograph-Medium_1.eot');
+    src: url('Psilograph-Medium_1.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Medium_1.woff2') format('woff2'),
+        url('Psilograph-Medium_1.woff') format('woff'),
+        url('Psilograph-Medium_1.ttf') format('truetype'),
+        url('Psilograph-Medium_1.svg#Psilograph-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-Light.eot');
+    src: url('Psilograph-Light.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Light.woff2') format('woff2'),
+        url('Psilograph-Light.woff') format('woff'),
+        url('Psilograph-Light.ttf') format('truetype'),
+        url('Psilograph-Light.svg#Psilograph-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-Light_1.eot');
+    src: url('Psilograph-Light_1.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Light_1.woff2') format('woff2'),
+        url('Psilograph-Light_1.woff') format('woff'),
+        url('Psilograph-Light_1.ttf') format('truetype'),
+        url('Psilograph-Light_1.svg#Psilograph-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-Thin.eot');
+    src: url('Psilograph-Thin.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Thin.woff2') format('woff2'),
+        url('Psilograph-Thin.woff') format('woff'),
+        url('Psilograph-Thin.ttf') format('truetype'),
+        url('Psilograph-Thin.svg#Psilograph-Thin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph';
+    src: url('Psilograph-Thin_1.eot');
+    src: url('Psilograph-Thin_1.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-Thin_1.woff2') format('woff2'),
+        url('Psilograph-Thin_1.woff') format('woff'),
+        url('Psilograph-Thin_1.ttf') format('truetype'),
+        url('Psilograph-Thin_1.svg#Psilograph-Thin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Psilograph SemBd';
+    src: url('Psilograph-SemiBold_1.eot');
+    src: url('Psilograph-SemiBold_1.eot?#iefix') format('embedded-opentype'),
+        url('Psilograph-SemiBold_1.woff2') format('woff2'),
+        url('Psilograph-SemiBold_1.woff') format('woff'),
+        url('Psilograph-SemiBold_1.ttf') format('truetype'),
+        url('Psilograph-SemiBold_1.svg#Psilograph-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
