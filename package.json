@@ -5,7 +5,8 @@
   "main": "/api/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate": "python public/scripts/get_songs.py"
+    "generate": "python public/scripts/get_songs.py",
+    "start": "node ./api/index.js"
   },
   "author": "Markus M",
   "license": "ISC",
