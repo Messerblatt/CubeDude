@@ -1,4 +1,4 @@
-const metadata = {
+const music_metadata = {
     "/audio/arabic-drum-2-acidpro.mp3": {
         "duration": 3,
         "sample_rate": 44100,
@@ -689,4 +689,4 @@ const metadata = {
     }
 }
 
-export default metadata;
+export default music_metadata;

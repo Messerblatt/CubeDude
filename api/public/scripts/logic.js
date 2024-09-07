@@ -1,5 +1,5 @@
 // import { parseFile } from 'music-metadata';
-import metadata from "/data/metadata.js";
+import music_metadata from "/data/music_metadata.js";
 window.trigger = ($(window).width() < 968) ? "touchstart" : "click";
 window.rotateIndex = 0;0
 
@@ -267,7 +267,7 @@ function playPause() {
 }
 
 function extract_metadata(songname) {
-  var song_data = metadata[songname]
+  var song_data = music_metadata[songname]
   $("#duration").html(song_data['duration'] + " Sec")
   $("#artist").html(song_data['artist']);
   $("#genre").html(song_data['genre']);
