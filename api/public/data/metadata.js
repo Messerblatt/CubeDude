@@ -689,4 +689,4 @@ const metadata = {
     }
 }
 
-export default metadata
+export default metadata;
