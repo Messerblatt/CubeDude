@@ -1,8 +1,14 @@
-// import { parseFile } from 'music-metadata';
-import music_metadata from "/data/music_metadata.js";
+
 window.trigger = ($(window).width() < 968) ? "touchstart" : "click";
 window.rotateIndex = 0;0
 
+
+// import music_metadata from "/data/music_metadata.js";
+
+let music_metadata;
+$.getJSON("/data/music_metadata.json", function(data) {
+  music_metadata = data
+})
 window.song = new Pz.Sound()
 // var folder;
 
