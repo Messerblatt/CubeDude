@@ -2,7 +2,7 @@
   "name": "cubedude",
   "version": "1.0.0",
   "description": "Discman's edgy little brother",
-  "main": "cubedude.js",
+  "main": "/api/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate": "python public/scripts/get_songs.py"
