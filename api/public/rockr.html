@@ -137,10 +137,8 @@
         <div id="sample_rate" class="fx_button"></div>
       </div>
       
-      <div class="fx_button future_kante text_centered pos_bottom_right"> <div class="underlined">I</div>nfo</div>
+      <div class="fx_button future_kante text_centered pos_bottom_right info_menu"> <div class="underlined">I</div>nfo</div>
     </div>
-
-
   </div>
 
   <object data="/HUD/future_edge_left.svg" type="image/svg+xml" id="future_edge_left"></object>
@@ -155,7 +153,7 @@
 
 <div class="grid_container">
   <div>
-    <div class="playPause fx_button text_centered future_kante" fx="playPause">Play</div>
+    <div id="playPause" class="playPause fx_button text_centered future_kante" fx="playPause">Play</div>
     <div class="underline"></div>
   </div>
   
@@ -192,6 +190,32 @@
 <div class="tracks_container">
   
 </div>
+
+
+
+<div id="audio_controls" class="flex centered" >
+
+  <div class="labeled_container mg_top10">
+    <input type="range" name="volume" id="volume" min="0" max="100" value="100">
+    <label for="volume" class="txt_white">Volume</label>
+  </div>
+<!-- 
+  <audio controls id="audioplayer" src="">
+  </audio>
+
+  <div class="progress_bar">
+    <div class="progress_bar_inside"></div>
+  </div>
+
+  <div class="before">
+    <img src="HUD/icons/prev.png" alt="">
+  </div>
+  <img class="playPause" src="HUD/icons/play.png" alt="">
+  <div class="next">
+    <img src="HUD/icons/next.png" alt="">
+  </div>
+</div>
+-->  
   <!-- <div class="current_time right_tab font-larger future_kante_open_right padding_px"></div> -->  
   <!-- <div class="progress_bar absolute_bottom"></div> -->
 

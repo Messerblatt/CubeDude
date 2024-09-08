@@ -1,14 +1,27 @@
-
 window.trigger = ($(window).width() < 968) ? "touchstart" : "click";
-window.rotateIndex = 0;0
-
-
-// import music_metadata from "/data/music_metadata.js";
+// window.rotateIndex = 0;0
 
 let music_metadata;
 $.getJSON("/data/music_metadata.json", function(data) {
   music_metadata = data
 })
+
+
+
+/* From: 
+https://www.freecodecamp.org/news/check-if-a-javascript-string-is-a-url/ 
+*/
+const isValidUrl = urlString=> {
+  var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
+'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
+'((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
+'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
+'(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
+'(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
+return !!urlPattern.test(urlString);
+}
+
+
 window.song = new Pz.Sound()
 // var folder;
 
@@ -92,7 +105,7 @@ function populate_info_menu() {
     }
   })
 
-  $(document).on(window.trigger, ".info", function() {
+  $(document).on(window.trigger, ".info_menu", function() {
     info_menu.toggle();
   }) 
 }
@@ -110,26 +123,32 @@ function register_songs() {
     // select_song($(this));
     window.song.stop();
     var songname = $(this).attr("target");
+    // var time_passed = 0;
+    // $(".progress_bar_inside").css("width", "0%")
     window.song = new Pz.Sound(songname, function() {
       window.song.attack = 0;
       window.song.loop = true;
       window.song.play();
       window.song.connect(analyzer);
-      $(".playPause").siblings(".underline").addClass("border_bottom_red")
+      window.song.volume = $("#volume").val() / 100;
+      // $(".playPause").siblings(".underline").addClass("border_bottom_red")
       extract_metadata(songname)
     })
 
     $(".active_icon").removeClass("active_icon")
     $(this).siblings(".active_icon").addClass("active_icon")
-    $(".playPause").html("Pause");
+    //$(".playPause").attr("src", "/HUD/icons/pause.png");
     $(".song").removeClass("active_song");
     $(this).addClass("active_song");
-
-    var title = $("#song").attr(songname);
-    $("#title").html(songname.split("/")[1]);
+    var substrings = songname.split("/")
+    $("#title").html(substrings[substrings.length - 1].split(".")[0]);
     $('.back_home_container').get(0).scrollIntoView();
   })
 
+  $("#volume").on("input", function() {
+    var volume = $(this).val()
+    window.song.volume = volume / 100;
+  })
 
   $(document).on(window.trigger, ".folder", function(e) {
     $(this).children(".subfolder").toggle();
@@ -152,9 +171,8 @@ function init_playPause() {
       playPause();
     }
   })
-
   $(document).on(window.trigger, ".playPause", function() {
-    playPause();
+    playPause()
   })
 }
 
@@ -259,26 +277,38 @@ function setup_mobile() {
   }
 }
 
+
 function playPause() {
-  var underline = $(".playPause").siblings(".underline")
   if (window.song.paused) {
+    $("#playPause").css("background-color", "red")
+    $("#playPause").siblings(".underline").addClass("border_bottom_red")
+    $("#playPause").html("Pause")
     window.song.play();
-    underline.addClass("border_bottom_red")
-    $(".playPause").html("Pause");
+    window.song.paused = false;
+    $(".playPause").attr("src", "/HUD/icons/play.png");
   } else {
-    underline.removeClass("border_bottom_red")
     window.song.pause();
-    $(".playPause").html("Play");
+    $(".playPause").attr("src", "/HUD/icons/pause1.png");
+    $("#playPause").css("background-color", "#111")
+    $("#playPause").siblings(".underline").removeClass("border_bottom_red")
+    $("#playPause").html("Play")
   }
 }
 
 function extract_metadata(songname) {
   var song_data = music_metadata[songname]
   $("#duration").html(song_data['duration'] + " Sec")
-  $("#artist").html(song_data['artist']);
+  var artist =  song_data['artist']
+  if (isValidUrl(artist)) {
+    $("#artist").html(`<a class='txt_red' href="${song_data['artist']}" target="_blank">Link</a>`);
+  } else {
+    $("#artist").html("Unknown");
+  }
   $("#genre").html(song_data['genre']);
   $("#genre_bottom").html(song_data['genre']);
   $("#bpm").html(song_data['BPM']);
   $("#sample_rate").html(song_data['sample_rate']);
   
 }
+
+
