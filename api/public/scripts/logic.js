@@ -1,30 +1,23 @@
 window.trigger = ($(window).width() < 968) ? "touchstart" : "click";
-// window.rotateIndex = 0;0
-
 let music_metadata;
 $.getJSON("/data/music_metadata.json", function(data) {
   music_metadata = data
 })
 
-
-
-/* From: 
-https://www.freecodecamp.org/news/check-if-a-javascript-string-is-a-url/ 
-*/
+// URL validator taken from https://www.jsowl.com
 const isValidUrl = urlString=> {
   var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
-'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
-'((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
-'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
-'(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
-'(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
-return !!urlPattern.test(urlString);
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
+  '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
+  return !!urlPattern.test(urlString);
 }
 
 
-window.song = new Pz.Sound()
-// var folder;
 
+// TODO: A self-contained Keymap
 var KEY_SPACE = 32;
 var KEY_ESCAPE = 27;
 var KEY_f = 70;
@@ -35,7 +28,7 @@ var KEY_t = 84;
 var KEY_l = 76;
 var KEY_i = 73;
 
-var analyzer = Pz.context.createAnalyser();  
+var analyzer = Pz.context.createAnalyser();
 
 // Get the depth of an object
 const objectDepth = (o) =>
@@ -45,45 +38,26 @@ $(document).ready(function() {
   console.log("$")
   populate_HTML();
   register_songs();
-  // register_folders();
   init_playPause();
-//  populate_folders();
   fx_load();
   fx_keybindings();
   setup_viz();
+  populate_info_menu();
   // setup_mobile();
 })
 
 function populate_HTML() {
-  //init_loading_screen();
-  populate_info_menu();
-  // populate_back_home();
-
-  $.getJSON("/scripts/folders.json", function(data) {
-    // folders = data
-    var items = []
-    
-    $.each(data, function(key, val) {
-      var song_name = key.split(".")[0];
-      var html = ""
-      var depth = objectDepth(val)  
-      if (depth == 1) {
-        html += `<div class="file song" target="/audio/${key}" duration="${val['duration']}">${song_name}</div>`;
-      } else {
-        html += `<div class="folder">${song_name}`;
-        html += `<div class="hidden subfolder">`
-        $.each(val, function(key_in, val_in) {
-          song_name = key_in.split(".")[0];
-          html += `<div class="file song" target="${val_in['path']}" duration="${val_in['duration']}">${song_name}</div>`
+  $.getJSON("/data/folders.json", function(data) {
+    $.each(data, function(folder, song) {
+      var html = `<div class="folder subfolder txt_left"><b>${folder}</b>`
+        $.each(song, function(title, data) {
+          html += `<div class="file song" target="/api/public/audio/${folder}/${title}">${title}</div>`;
         })
-        html += "</div>"
-      }
-    
-      html += `</div>`
-    
-      $(".sidebar").append(html)
+
+        html += `</div>`
+        $(".sidebar").append(html)
     })
-  })
+  }) 
 }
 
 function init_loading_screen() {
@@ -107,62 +81,62 @@ function populate_info_menu() {
 
   $(document).on(window.trigger, ".info_menu", function() {
     info_menu.toggle();
-  }) 
-}
-
-function populate_back_home() {
-  $(".back_home_container").load("back_home.html")
-    .on(window.trigger, function() {
-      window.location.href = "https://www.messerblatt.com/"
-    })
+  })
 }
 
 function register_songs() {
   $(document).on("click", ".song", function(event) {
     event.stopPropagation();
-    // select_song($(this));
-    window.song.stop();
     var songname = $(this).attr("target");
-    // var time_passed = 0;
-    // $(".progress_bar_inside").css("width", "0%")
-    window.song = new Pz.Sound(songname, function() {
+    
+    var path_split = songname.split("/")
+    var path = "../audio/" 
+      + path_split[path_split.length - 2] // Get folder
+      + "/"
+      + path_split[path_split.length - 1] // Get song inside folder
+
+    extract_metadata(songname)
+    window.song.stop();
+    window.song = new Pz.Sound(path, function() {
       window.song.attack = 0;
       window.song.loop = true;
       window.song.play();
       window.song.connect(analyzer);
       window.song.volume = $("#volume").val() / 100;
       // $(".playPause").siblings(".underline").addClass("border_bottom_red")
-      extract_metadata(songname)
+      
     })
 
     $(".active_icon").removeClass("active_icon")
     $(this).siblings(".active_icon").addClass("active_icon")
-    //$(".playPause").attr("src", "/HUD/icons/pause.png");
     $(".song").removeClass("active_song");
     $(this).addClass("active_song");
     var substrings = songname.split("/")
     $("#title").html(substrings[substrings.length - 1].split(".")[0]);
-    $('.back_home_container').get(0).scrollIntoView();
-  })
-
-  $("#volume").on("input", function() {
-    var volume = $(this).val()
-    window.song.volume = volume / 100;
-  })
-
-  $(document).on(window.trigger, ".folder", function(e) {
-    $(this).children(".subfolder").toggle();
-    $(this).unbind("mouseover mouseleave")
-  })
-
-  $(document).on("mouseover mouseleave", ".file", function(e) {
-    if (e.type == "mouseover") {
-      $(this).addClass("highlighted")
-    } else {
-      $(this).removeClass("highlighted")
-    }
+    // $('.back_home_container').get(0).scrollIntoView(); For mobile only
   })
 }
+
+
+// Encapsulate Event-listeners maybe?
+$("#volume").on("input", function() {
+  var volume = $(this).val()
+  window.song.volume = volume / 100;
+})
+
+$(document).on(window.trigger, ".folder", function(e) {
+  $(this).children(".subfolder").toggle();
+  $(this).unbind("mouseover mouseleave")
+})
+
+$(document).on("mouseover mouseleave", ".file", function(e) {
+  if (e.type == "mouseover") {
+    $(this).addClass("highlighted")
+  } else {
+    $(this).removeClass("highlighted")
+  }
+})
+
 
 function init_playPause() {
   // Register PlayPause on Spacebar
@@ -277,8 +251,7 @@ function setup_mobile() {
   }
 }
 
-
-function playPause() {
+function playPause() {  
   if (window.song.paused) {
     $("#playPause").css("background-color", "red")
     $("#playPause").siblings(".underline").addClass("border_bottom_red")
@@ -296,19 +269,27 @@ function playPause() {
 }
 
 function extract_metadata(songname) {
-  var song_data = music_metadata[songname]
-  $("#duration").html(song_data['duration'] + " Sec")
-  var artist =  song_data['artist']
-  if (isValidUrl(artist)) {
-    $("#artist").html(`<a class='txt_red' href="${song_data['artist']}" target="_blank">Link</a>`);
-  } else {
-    $("#artist").html("Unknown");
-  }
-  $("#genre").html(song_data['genre']);
-  $("#genre_bottom").html(song_data['genre']);
-  $("#bpm").html(song_data['BPM']);
-  $("#sample_rate").html(song_data['sample_rate']);
   
+  var path_split = songname.split("/")
+  var path = "../audio/" 
+    + path_split[path_split.length - 2]
+    + "/"
+    + path_split[path_split.length - 1]
+
+  console.log(path)
+  var title = path_split[path_split.length - 1]
+  var song_data = music_metadata[title]
+
+  if (isValidUrl(song_data['WEBSITE'])) {
+    $("#website").html(`<a class='txt_red' href="${song_data['WEBSITE']}" target="_blank">Link</a>`);
+  } else {
+    $("#website").html("Unknown");
+  }
+
+  $("#artist").html(song_data['ARTIST']);
+  $("#genre").html(song_data['GENRE']);
+  $("#bpm").html(song_data['BPM']);
+  $("#key").html(song_data['INITIALKEY']);
 }
 
 

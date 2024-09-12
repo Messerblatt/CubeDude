@@ -6,7 +6,7 @@
 :root {
   --sidebar_size: 350px;
   --bg: #262626;
-  --button-width: 150px;
+  --button-width: 200px;
   --button-height: 50px;
   --responsive-size: 968px;
   --header-height: 50px;
@@ -472,7 +472,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button
   }
 
   .subfolder > * {
-    margin-left: 50px;
+    margin-left: 5px;
   }
 
   .highlighted {

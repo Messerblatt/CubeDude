@@ -1,4 +1,4 @@
-window.song;
+window.song = new Pz.Sound()
 
 window.flanger = new Pizzicato.Effects.Flanger({
   time: 0.1,

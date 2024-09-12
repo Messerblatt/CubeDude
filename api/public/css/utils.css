@@ -7,6 +7,11 @@
 .txt_purple { color: purple; }
 .txt_white { color: white; }
 
+
+.txt_left {
+  text-align: left;
+}
+
 .bg_orange { background-color: orange; }
 .bg_cyan { background-color: cyan; }
 
