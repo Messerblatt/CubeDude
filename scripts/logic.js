@@ -1,7 +1,7 @@
 import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
 window.trigger = ($(window).width() < 968) ? "touchstart" : "click";
 let music_metadata;
-$.getJSON("../data/music_metadata.json", function(data) {
+$.getJSON("data/music_metadata.json", function(data) {
   music_metadata = data
 })
 
