@@ -5,55 +5,50 @@
 
 :root {
   --sidebar_size: 350px;
+  --primary: red;
   --bg: #262626;
-  --button-width: 200px;
+  --text_color: white;
+  --switch_off: white;
+  --switch_on: var(--primary);
+  --button-width: 10vw;
   --button-height: 50px;
   --responsive-size: 968px;
   --header-height: 50px;
   --icon-dim: 16px;
 }
 
-body {
-  margin: 0px;
-}
+body { margin: 0px; }
 
 html {
+  font-family: "Source Code Pro", "Sans";
   background: linear-gradient(#eef2f3, #8e9eab);
-  /*background-image: url("imgs/apasaric.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;*/
   height: 100%;
-  color: #111;
+  color: var(--bg)
 }
 
-* {
-  font-family: "Source Code Pro", "Sans";
-}
+h1 { font-family: "Orbitron", "Source Code Pro","Sans"; } 
+
+
 
 @media only screen and (max-width: 968px) {
   
-
   html {
-    background-image: none !important;
-    background-color: #111;
-    /* animation: blinkBackground 1s infinite; */
+    background-color: var(--fg);
+    color: var(--bg);
   }
 
-  @keyframes blinkBackground {
-    0% { background-color: black; }
-    100% { background-color: white; }
-}
   [class*="paragraph"] {
     margin-left: 0% !important;
     margin-right: 0% !important;
   }
 
-  h1 {
-    color: aliceblue;
-    padding-top: 0%;
-    font-size: 1rem;
-    visibility: hidden;
-  } 
+  #viz_container {
+    display: none !important;
+  }
+
+  .tracklist_header {
+    display: none;
+  }
 
   .loading_screen {
     visibility: hidden !important;
@@ -66,10 +61,6 @@ html {
     font-size: unset !important;
   }
 
-  .file, .song {
-    color: #eee;
-  }
-
   .sidebar a {
     margin-top: 12px;
     margin-bottom: 12px;
@@ -78,15 +69,22 @@ html {
   .song_container {
     display: grid;
     grid-template-columns: 5% 75% 20%;
-    background-color: gray;
+    background-color: var(--secondary);
   }
 
-
   .fx_button {
-    width: 50vw !important;
-    height: 25vh !important;
-    font-size: 2rem;
+    width: 45vw !important;
+    height: 10vh !important;
+    font-size: 1.5rem;
+    line-height: 10vh !important;
+  }
 
+  .song_title {
+    color: red !important;
+  }
+
+  object {
+    display: none !important;
   }
 
 
@@ -124,9 +122,8 @@ html {
 }
 
 .future_kante {
-  border: 1px solid white;
+  border: 1px solid var(--fg);
 }
-
 
 .sidebar {
   left: 3%;
@@ -136,7 +133,6 @@ html {
   position: absolute;
   font-size: small;
   backdrop-filter: blur(20px);
-  
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
@@ -149,7 +145,6 @@ html {
 /* Sidebar links */
 .sidebar a {
   display: block;
-  
   padding: 5px;
   text-decoration: none;
   font-family: "Source Code Pro", "Sans serif";
@@ -158,30 +153,12 @@ html {
 
 /* Active/current link */
 .active_song {
- background-color: red; 
+ background-color: var(--primary);
  color: var(--bg);
 }
 
-
-/*
-.sidebar a:hover:not(.active) {
-  color:red;
-  cursor: crosshair;
-} */
-
-
-/* .current_time {
-  font-family: "orbitronregular", sans-serif;
-  font-size: 3rem;
-  position: absolute;
-  bottom: 5%;
-  left: 10%;
-  width: 250px;
-  text-align: center;
-} */
-
 .progress_bar {
-  background-color: #eee;
+  background-color: var(--bg);
   /*animation: progress linear infinite;
   animation-duration: 5s; */
   height: 10px;
@@ -189,7 +166,7 @@ html {
 }
 
 .progress_bar_inside {
-  background-color: red;
+  background-color: var(--primary);
   height: 10px;
 }
 
@@ -197,34 +174,6 @@ html {
   from { min-width: 0vw; }
   to { min-width: 100vw; }
 }
-
-audio::-webkit-media-controls-panel {
-  background-color: white;
-}
-
-audio::-webkit-media-controls-enclosure {
-  border-radius: 0;
-}
-
-audio::-webkit-media-controls-play-button {
-  border-radius: 0;
-}
-
-/*
-audio::-webkit-media-controls-mute-button
-audio::-webkit-media-controls-timeline-container
-audio::-webkit-media-controls-current-time-display
-audio::-webkit-media-controls-time-remaining-display
-audio::-webkit-media-controls-timeline
-audio::-webkit-media-controls-volume-slider-container
-audio::-webkit-media-controls-volume-slider
-audio::-webkit-media-controls-seek-back-button
-audio::-webkit-media-controls-seek-forward-button
-audio::-webkit-media-controls-fullscreen-button
-audio::-webkit-media-controls-rewind-button
-audio::-webkit-media-controls-return-to-realtime-button
-audio::-webkit-media-controls-toggle-closed-captions-button
-*/
 
 .text_centered {
   text-align: center;
@@ -236,11 +185,20 @@ audio::-webkit-media-controls-toggle-closed-captions-button
   width: var(--button-width);
   height: var(--button-height);
   cursor: crosshair;
-  background-color: #111;
-  color: #eee;
+  background-color: var(--bg);
+  color: var(--fg);
   text-align: center;
   margin-inline-start: 12px;
 }
+
+.underline {
+  content: "";
+  margin: auto;
+  margin-top: 7px;
+  border-bottom: 2px solid var(--fg);
+  width: 67%;
+}
+
 
 .scrollDown {
   width: var(--button-width);
@@ -251,8 +209,6 @@ audio::-webkit-media-controls-toggle-closed-captions-button
 .grid_container {
   display: flex;
   position: absolute;
-  margin-top: calc(var(--header-height) + 7px);
-  
   left: 50%;
   transform: translate(-50%, 0%);
 }
@@ -282,15 +238,6 @@ audio::-webkit-media-controls-toggle-closed-captions-button
   padding-left: 25px;
 }
 
-.rockr_header > #homeButton {
-  background-color: red;
-}
-.rockr_header > #homeButton:hover {
-  background-color: white;
-  color: black;
-  cursor: crosshair;
-}
-
 .rockr_footer {
   display: flex;
   flex-direction: column;
@@ -313,13 +260,12 @@ audio::-webkit-media-controls-toggle-closed-captions-button
 .info_menu_container {
   position: absolute;
   margin-left: var(--sidebar_size);
-  background-color: #eee;
-  color: red;
+  background-color: var(--fg);
+  color: var(--primary);
   left: 40%;
   top: 45%;
   transform: translate(-50%, -50%);
-  border: 1px solid white;
-  width: 33%;
+  width: 51%;
   overflow: auto;
   height: 75%;
   z-index: 2;
@@ -331,8 +277,17 @@ audio::-webkit-media-controls-toggle-closed-captions-button
   text-align: center;
 }
 
-#title {
+#icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 96px;
+}
+
+#song_title {
+  font-size: 1.5rem;
   width: 600px;
+  height: 120px;
   line-height: var(--header-height);
   font-family: "Orbitron", "Source Code Pro","Sans";
   margin-bottom: 0;
@@ -363,22 +318,13 @@ audio::-webkit-media-controls-toggle-closed-captions-button
 
 
 #tracklist {
-  background-color: aliceblue;
-  color: red;
+  background-color: var(--secondary);
+  color: var(--primary);
 }
 
 
-.underline {
-  content: "";
-  margin: auto;
-  margin-top: 7px;
-  border-bottom: 2px solid white;
-  width: 67%;
-}
-
-.border_bottom_red {
-  border-bottom: 2px solid red;
-}
+.switch_on { border-bottom: 2px solid var(--elem_bg_on); }
+.switch_off { border-bottom: 2px solid var(--switch_bg_off); }
 
 
 .back_home_figure {
@@ -398,21 +344,20 @@ audio::-webkit-media-controls-toggle-closed-captions-button
   text-align: center;
   }
 
-
-  .a_viz {
-    position: absolute;
-    bottom: 0%;
-    pointer-events: none;
-  }
-
-
   .bt_download {
    width: calc(var(--button-width) /2);
    height: calc(var(--button-height) / 2);
-   background-color: red;
+   background-color: var(--primary);
    line-height: calc(var(--button-height) / 2);
   }
 
+  #viz_container {
+    position: absolute;
+    width: calc(97vw - var(--sidebar_size));
+    margin-left: calc(3vw + var(--sidebar_size));
+    height: 500px !important;
+    bottom: 20%;
+  }
 
   
   .file_explorer {
@@ -463,8 +408,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button
 
   .folder:hover {
     cursor: crosshair;
-    color: #111;
-    background-color: whitesmoke;
+    background-color: var(--secondary);
   }
 
   .hidden {
@@ -476,17 +420,16 @@ audio::-webkit-media-controls-toggle-closed-captions-button
   }
 
   .highlighted {
-    background-color: red;
+    background-color: var(--primary);
+    color: var(--fg);
     cursor: crosshair;
-    color: white;
+    
   }
 
   .loading_screen {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background-color: white;
-    color: black;
     z-index: 99;
   }
 
@@ -505,7 +448,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button
 
 .spinner::before, .spinner::after {
    content: '';
-   border: 6.7px solid red;
+   border: 6.7px solid var(--primary);
    border-radius: 50%;
    display: block;
 }
@@ -534,7 +477,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button
 #audio_controls {
   position: fixed;
   bottom: 0;
-  background-color: #262626;
+  background-color: var(--bg);
   min-width: 100%;
   height: 50px;
   position: absolute;
@@ -551,7 +494,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button
 
 input[type="range"] {
   -webkit-appearance: none;
-  outline: red;
+  outline: var(--primary);
   appearance: none;
   height: 10px;
 }
@@ -563,9 +506,9 @@ input[type="range"]::-webkit-slider-thumb {
   appearance: none; 
   /* creating a custom design */
   width: 25px;
-  border: 2px solid red;
+  border: 2px solid var(--primary);
   height: 15px;
-  background-color: red;
+  background-color: var(--primary)
   /*  slider progress trick  */
 }
 
@@ -574,9 +517,27 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]::-moz-range-thumb {
   height: 15px;
   width: 25px;
-  background-color: #fff;
+  background-color: var(--fg);
   border-radius: 50%;
-  color: red;
+  color: var(--primary);
   /*  slider progress trick  */
 }
 
+
+#audio_player {
+  height: 200px;
+}
+
+#viz_canvas {
+  height: 200px;
+}
+
+
+#wave_container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  color: var(--primary);
+  width: 600px;
+  height: 200px;
+}

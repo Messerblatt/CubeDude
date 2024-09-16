@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="45.155552mm"
+   height="45.203846mm"
+   viewBox="0 0 45.155552 45.203846"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-67.488931,-85.762098)">
+    <rect
+       style="fill:#121212;fill-opacity:1;stroke-width:0.868757;stroke-dashoffset:1.36063"
+       id="rect1"
+       width="33.866665"
+       height="33.866665"
+       x="67.48893"
+       y="85.7621" />
+    <rect
+       style="fill:#121212;fill-opacity:1;stroke-width:0.289586;stroke-dashoffset:1.36063"
+       id="rect1-3"
+       width="11.288889"
+       height="11.288889"
+       x="101.35559"
+       y="119.67706" />
+    <text
+       xml:space="preserve"
+       style="font-weight:900;font-size:5.01525px;font-family:Tektur;-inkscape-font-specification:'Tektur Heavy';letter-spacing:0.23509px;fill:#121212;fill-opacity:1;stroke-width:0.444264;stroke-dashoffset:1.36063"
+       x="69.240776"
+       y="127.25238"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Orbitron;-inkscape-font-specification:'Orbitron Bold';fill:#121212;fill-opacity:1;stroke-width:0.444265"
+         x="69.240776"
+         y="127.25238">CubeDude</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,46 @@
+:root {
+  --bg: #323232;
+  --bg_darken: #222;
+  --fg: white;
+  --primary: red;
+  --secondary: white;
+  --elem_bg_off: var(--bg);
+  --elem_bg_on: var(--primary);
+  --elem_fg_off: var(--fg);
+  --elem_fg_on: var(--fg);
+  
+}
+
+html {
+  color: var(--bg);
+  background: linear-gradient(#eef2f3, #8e9eab);
+}
+
+.active_song {
+  background-color: var(--elem_bg_on);
+  color: var(--elem_fg_on);
+}
+
+.fx_button {
+  color: var(--text_color);
+  background-color: var(--bg)
+}
+
+.underline {
+  height: 4px;
+  width: 66px;
+  background-color: #1a1a1a;
+  text-align: center;
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.switch_on {
+  background-color: var(--primary);
+  box-shadow: 0 0 15px var(--primary), 
+              0 0 5px var(--primary);
+}
+
+a {
+  color: var(--primary)
+}

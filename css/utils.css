@@ -211,11 +211,17 @@
 .ft_5 {font-size: 5rem;}
 
 
+.pos_top { 
+  position: absolute;
+  top: 2%; 
+  transform: translate(0, -50%);
+}
+
 .bd_rd { border-radius: 5px; }
 
 .pos_bottom_right {
   position: fixed;
-  bottom: 20px;
+  bottom: 5px;
   right: 5%;
 }
 

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cubedude</title>
+  <script type="module" src="scripts/jquery.js"></script>
+  <script type="module" src="scripts/pizzicato_min.js"></script>
+  <script type="module" src="scripts/effects.js"></script>
+  <script type="module" src="scripts/logic.js"></script>
+  <script type="module" src="scripts/wavesurfer_min.js"></script>
+  <link rel="stylesheet" href="css/theme_mirrors_edge.css">
+  <link rel="stylesheet" href="css/utils.css">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <link rel="stylesheet" href="css/the_grid.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <meta property="og:title" content="CubeDude" />
+  <meta property="og:description" content="A webbrowser-based Audio-Player and Special Effects like Flanger and Reverb and stuff" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.messerblatt.com/rockr/rockr.html/">
+  <meta property="og:image" content="https://www.messerblatt.com/assets/images/icons/pic.jpg" />
+</head>
+<body class="grid1">
+
+    <div class="taskbar">
+      <h1>Cubedude</h1>
+    </div>
+
+    <div class="songlist_title">
+      <div class="headline">Songlist</div>
+      
+      <div class="songlist"></div>
+    </div>
+
+    <div id="viz_container" class="viz">
+      <canvas id="viz_canvas"></canvas>
+    </div>
+    
+    <div class="fx_title ">
+      <div class="headline">Effects</div>
+      <div class="flex fx">
+        
+
+        <div>
+          <label class="flex mg_bottom20 mg_top20">50%</label>
+          <input type="range" name="volume" id="volume" default="100" class="flex vertical centered_h slider">
+          <button class="fx_button mg_top20" id="playPause">Play</button>
+          <div class="mg_top5 underline" id="play_underline"></div>
+        </div>
+
+        <div>
+          <label class="flex mg_bottom20 mg_top20">50%</label>
+          <input type="range" name="flanger_val" id="flanger_val" class="flex vertical centered_h slider">
+          <button class="fx_button mg_top20" id="flanger">Flanger</button>
+          <div class="mg_top5 underline"></div>
+        </div>
+
+        <div>
+          <label class="flex mg_bottom20 mg_top20">50%</label>
+          <input type="range" name="distortion_val" id="distortion_val" class="flex vertical centered_h slider">
+          <button class="fx_button mg_top20" id="distortion">Distortion</button>
+          <div class="mg_top5 underline"></div>
+        </div>
+
+
+        <div>
+          <label class=" flex mg_bottom20 mg_top20">50%</label>
+          <input type="range" name="reverb_val" id="reverb_val" class="flex vertical centered_h slider">
+          <button class="fx_button mg_top20" id="reverb">Reverb</button>
+          <div class="mg_top5 underline"></div>
+        </div>
+
+        <div>
+          <label class="text_centered flex mg_bottom20 mg_top20">50%</label>
+          <input type="range" name="delay_val" id="delay_val" class="flex vertical centered_h slider">
+          <button class="fx_button mg_top20" id="delay">Delay</button>
+          <div class="mg_top5 underline"></div>
+        </div>
+
+        <div>
+          <label class="text_centered flex mg_bottom20 mg_top20">50%</label>
+          <input type="range" name="tremolo_val" id="tremolo_val" class="flex vertical centered_h slider">
+          <button class="fx_button mg_top20" id="tremolo">Tremolo</button>
+          <div class="mg_top5 underline"></div>
+        </div>
+
+        <div>
+          <label class="text_centered flex mg_bottom20 mg_top20">50%</label>
+          <input type="range" name="lowPass_val" id="lowPass_val" class="flex vertical centered_h slider">
+          <button class="fx_button mg_top20" id="lowPassFilter">LowPassFilter</button>
+          <div class="mg_top5 underline"></div>
+        </div>
+
+      </div>
+      
+    </div>
+
+    <div class="meta_title">
+      <div class="headline">Metadata</div>
+      <div class="metadata">
+        <table>
+          <thead>
+            <td>APEv2 Key</td>
+            <td>Value</td>
+          </thead>
+          <tbody>
+        <tr>
+        <td>ARTIST</td>
+        <td id="ARTIST"></td>
+        </tr>
+        <tr>
+        <td>WEBSITE</td>
+        <td id="WEBSITE"></td>
+        </tr>
+        <tr>
+        <td>ALBUM</td>
+        <td id="ALBUM"></td>
+        </tr>
+        <tr>
+        <td>TRACK</td>
+        <td id="TRACK"></td>
+        </tr>
+        <tr>
+        <td>YEAR</td>
+        <td id="YEAR"></td>
+        </tr>
+        <tr>
+        <td>GENRE</td>
+        <td id="GENRE"></td>
+        </tr>
+        <tr>
+        <td>COMMENT</td>
+        <td id="COMMENT"></td>
+        </tr>
+        <tr>
+        <td>COMPOSER</td>
+        <td id="COMPOSER"></td>
+        </tr>
+        <tr>
+        <td>INITIALKEY</td>
+        <td id="INITIALKEY"></td>
+        </tr>
+        <tr>
+        <td>PUBLISHER</td>
+        <td id="PUBLISHER"></td>
+        </tr>
+        <tr>
+        <td>DISC</td>
+        <td id="DISC"></td>
+        </tr>
+        <tr>
+        <td>DISCTOTAL</td>
+        <td id="DISCTOTAL"></td>
+        </tr>
+        <tr>
+        <td>TRACKTOTAL</td>
+        <td id="TRACKTOTAL"></td>
+        </tr>
+        <tr>
+        <td>ALBUMARTIST</td>
+        <td id="ALBUMARTIST"></td>
+        </tr>
+        <tr>
+        <td>BPM</td>
+        <td id="BPM"></td>
+        </tr>
+        <tr>
+        <td>COMPILATION</td>
+        <td id="COMPILATION"></td>
+        </tr>
+        <tr>
+        <td>COPYRIGHT</td>
+        <td id="COPYRIGHT"></td>
+        </tr>
+        <tr>
+        <td>ENCODEDBY</td>
+        <td id="ENCODEDBY"></td>
+        </tr>
+        <tr>
+        <td>ENCODERSETTINGS</td>
+        <td id="ENCODERSETTINGS"></td>
+        </tr>
+        <tr>
+        <td>ISRC</td>
+        <td id="ISRC"></td>
+        </tr>
+        <tr>
+        <td>REPLAYGAIN_TRACK_GAIN</td>
+        <td id="REPLAYGAIN_TRACK_GAIN"></td>
+        </tr>
+        <tr>
+        <td>REPLAYGAIN_ALBUM_GAIN</td>
+        <td id="REPLAYGAIN_ALBUM_GAIN"></td>
+        </tr>
+        <tr>
+        <td>REPLAYGAIN_TRACK_PEAK</td>
+        <td id="REPLAYGAIN_TRACK_PEAK"></td>
+        </tr>
+        <tr>
+        <td>REPLAYGAIN_ALBUM_PEAK</td>
+        <td id="REPLAYGAIN_ALBUM_PEAK"></td>
+        </tr>
+        <tr>
+        <td>LYRICS</td>
+        <td id="LYRICS"></td>
+        </tr>
+        <tr>
+        <td>COVERART</td>
+        <td id="COVERART"></td>
+        </tr>
+        <tr>
+        <td>CONDUCTOR</td>
+        <td id="CONDUCTOR"></td>
+        </tr>
+        <tr>
+        <td>SUBTITLE</td>
+        <td id="SUBTITLE"></td>
+        </tr>
+        <tr>
+        <td>PRODUCER</td>
+        <td id="PRODUCER"></td>
+        </tr>
+        <tr>
+        <td>LANGUAGE</td>
+        <td id="LANGUAGE"></td>
+        </tr>
+        <tr>
+        <td>MEDIA</td>
+        <td id="MEDIA"></td>
+        </tr>
+        <tr>
+        <td>STYLE</td>
+        <td id="STYLE"></td>
+        </tr>
+        <tr>
+        <td>REMIXEDBY</td>
+        <td id="REMIXEDBY"></td>
+        </tr>
+        <tr>
+        <td>CATALOGNUMBER</td>
+        <td id="CATALOGNUMBER"></td>
+        </tr>
+        <tr>
+        <td>MOOD</td>
+        <td id="MOOD"></td>
+        </tr>
+        <tr>
+        <td>ENCODEDDATE</td>
+        <td id="ENCODEDDATE"></td>
+        </tr>
+
+      </tbody>
+      </div>
+      
+    </div>
+
+
+<div class="info_menu_container"></div>
+<div id="bt_about">About</div>
+
+</body>
+</html>

@@ -43,4 +43,5 @@ window.effects = {
   "lowPassFilter": {"ref": window.lowPassFilter, "set": false},
   "distortion": {"ref": window.distortion, "set": false},
   "delay": {"ref": window.delay, "set": false},
+  "active" : []
 };

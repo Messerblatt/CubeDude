@@ -9,18 +9,30 @@ from pathlib import PurePosixPath
 from dotenv import dotenv_values
 from mutagen.apev2 import APEv2
 
-root = "../../.."
+root = "../"
 config = dotenv_values(root + "/.env")
+
+
 AUDIO_DIR = root + config['AUDIO_DIR']
 DATA_DIR = root + config['DATA_DIR']
 AUDIO_EXTENSIONS = ['.mp3', '.wav', '.flac', '.aac', '.ogg', '.m4a', '.wma']
 
 
-# Set up Debug-Flag
+# Set up args-Flags
 parser = argparse.ArgumentParser(description="To Debug, call script with --DEBUG=1")
 parser.add_argument('--DEBUG', type=int, choices=[0, 1], default=0, 
                         help="Enable debug mode by setting --DEBUG=1 (default is 0).")
+
+
+parser.add_argument('--RICH', type=int, choices=[0, 1], default=1, 
+                        help="Enable sparse metadata annotation with --RICH=0 (default is 1).")
+
 DEBUG = parser.parse_args().DEBUG
+RICH = parser.parse_args().RICH
+
+
+if DEBUG: print(config)
+
 def debug(*args):
   from rich.pretty import pprint
   if DEBUG:
@@ -37,11 +49,25 @@ def now():
 def getAPEv2(file):
   debug("Processing: ", file)
   try:
-    f = APEv2(file)
+    defined_meta = APEv2(file)
   except:
     debug("No APEv2 data found. Skip this...")
-    return dict()
-  return {key: str(value) for key, value in zip(f.keys(), f.values())}
+    return {"ERROR": 1}
+  
+  if RICH:
+    
+    # Get all possibleAPE2Tags
+    APEv2Tags = dict()
+    with open("APEv2Tags.json") as metadata_json:
+      APEv2Tags = json.load(metadata_json)
+
+    for key in APEv2Tags.keys():
+      defined_meta[key] = defined_meta[key] if key in defined_meta.keys() else "-"
+    
+    defined_meta = {key: str(value) for key, value in zip(defined_meta.keys(), defined_meta.values())}
+    debug("APEv2: ", defined_meta)
+  # import pdb; pdb.set_trace()
+  return defined_meta
 
 
 # Get depth of a dict
