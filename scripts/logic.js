@@ -46,7 +46,7 @@ $(document).ready(function() {
 })
 
 function populate_HTML() {
-  $.getJSON("../data/folders.json", function(data) {
+  $.getJSON("data/folders.json", function(data) {
     $.each(data, function(folder, song) {
       var html = `
       <div class="taskbar_small">
