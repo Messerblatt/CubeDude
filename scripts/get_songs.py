@@ -100,7 +100,7 @@ def find_audio_files(directory):
               # Appends the **FULL** path to the list
               songs.append(root + "/" + file)
 
-  logger.info(f' {now()}: {len(songs)} songs found')
+  # logger.info(f' {now()}: {len(songs)} songs found')
   return songs
 
 def export_metadata():
@@ -116,7 +116,7 @@ def export_metadata():
 
 
 if __name__ == "__main__":
-  logger.info(f' {now()}: Start')
+  # logger.info(f' {now()}: Start')
   folder_structure = get_folder_structure(AUDIO_DIR)
 
   with open(DATA_DIR + "/folders.json", "w") as f:
@@ -124,5 +124,5 @@ if __name__ == "__main__":
 
   # import pdb; pdb.set_trace()
   export_metadata()
-  logger.info(f' {now()}: Finished')
+  # logger.info(f' {now()}: Finished')
   print("OK")

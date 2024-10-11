@@ -2,6 +2,7 @@
 .vscode
 node_modules
 .vercel
-logs
+logs/*
 audio_/
 scripts/ftp_sync.py
+rockr.html
