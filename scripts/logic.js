@@ -222,7 +222,6 @@ function setup_viz() {
 function playPause() {  
   if (window.song.paused) {
     $("#play_underline").addClass("switch_on")
-    // window.wavesurfer.play()
     $("#playPause").siblings(".underline").addClass("switch_on")
     $("#playPause").html("Pause")
     window.song.play();
@@ -231,7 +230,6 @@ function playPause() {
   } else {
      $("#play_underline").removeClass("switch_on")
     window.song.pause();
-    // window.wavesurfer.pause()
     $("#playPause").siblings(".underline").removeClass("switch_on")
     $("#playPause").html("Play")
   }
