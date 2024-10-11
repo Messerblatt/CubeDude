@@ -12,24 +12,20 @@ from mutagen.apev2 import APEv2
 root = "../"
 config = dotenv_values(root + "/.env")
 
-
 AUDIO_DIR = root + config['AUDIO_DIR']
 DATA_DIR = root + config['DATA_DIR']
 AUDIO_EXTENSIONS = ['.mp3', '.wav', '.flac', '.aac', '.ogg', '.m4a', '.wma']
-
 
 # Set up args-Flags
 parser = argparse.ArgumentParser(description="To Debug, call script with --DEBUG=1")
 parser.add_argument('--DEBUG', type=int, choices=[0, 1], default=0, 
                         help="Enable debug mode by setting --DEBUG=1 (default is 0).")
 
-
 parser.add_argument('--RICH', type=int, choices=[0, 1], default=1, 
                         help="Enable sparse metadata annotation with --RICH=0 (default is 1).")
 
 DEBUG = parser.parse_args().DEBUG
 RICH = parser.parse_args().RICH
-
 
 if DEBUG: print(config)
 
@@ -38,13 +34,11 @@ def debug(*args):
   if DEBUG:
     pprint(args)
 
-
 # Set up Logger
 logger = logging.getLogger(__name__)
 def now():
   date = datetime.now()
   return f"{date.day}.{date.month}.{date.year}-{date.hour}:{date.minute}:{date.second}"
-
 
 def getAPEv2(file):
   debug("Processing: ", file)
@@ -55,7 +49,6 @@ def getAPEv2(file):
     return {"ERROR": 1}
   
   if RICH:
-    
     # Get all possibleAPE2Tags
     APEv2Tags = dict()
     with open("APEv2Tags.json") as metadata_json:
@@ -66,9 +59,7 @@ def getAPEv2(file):
     
     defined_meta = {key: str(value) for key, value in zip(defined_meta.keys(), defined_meta.values())}
     debug("APEv2: ", defined_meta)
-  # import pdb; pdb.set_trace()
   return defined_meta
-
 
 # Get depth of a dict
 def depth(d):
@@ -76,30 +67,27 @@ def depth(d):
     return 1 + (max(map(depth, d.values())) if d else 0)
   return 0
 
-
 def isMp3(file):
   return file.endswith(".mp3")
 
 
 def get_folder_structure(path):
-  """Returns a dictionary containing the folder structure of the supplied path."""
+    dir_dict = {}
+    for root, dirs, files in os.walk(path):
+        folder_path = os.path.relpath(root, path)
+        
+        # Use folder path as the key and create sub-dictionaries for files
+        if folder_path == '.':
+            folder_path = os.path.basename(path)  # Root folder name
+        dir_dict[folder_path] = {}
 
-  folder_structure = {}
-  for entry in os.listdir(path):
-      entry_path = str(path) + "/" + entry
-      
-      if os.path.isdir(entry_path):
-          # If entry is a dict, recursively call the function and add the result to the dictionary
-          folder_structure[entry] = get_folder_structure(entry_path)
-      else:
-        if entry_path.endswith(".mp3"):
-            folder_structure[entry] = getAPEv2(entry_path)
+        # Iterate over each file and store the file's relative path
+        for file in files:
+            file_path = os.path.join("audio/", file)
+            dir_dict[folder_path][file] = file_path
+    del(dir_dict['audio'])
+    return dir_dict
 
-  debug("get_folder_structure(): ", folder_structure)
-  logger.info(f' {now()}: folder_structure established')
-  with open(DATA_DIR + "folders.json", "w") as f:
-    json.dump(folder_structure, f, indent=4)
-  return folder_structure
 
 
 def find_audio_files(directory):
@@ -114,7 +102,6 @@ def find_audio_files(directory):
 
   logger.info(f' {now()}: {len(songs)} songs found')
   return songs
-
 
 def export_metadata():
   songs = find_audio_files(AUDIO_DIR)
@@ -131,6 +118,11 @@ def export_metadata():
 if __name__ == "__main__":
   logger.info(f' {now()}: Start')
   folder_structure = get_folder_structure(AUDIO_DIR)
+
+  with open(DATA_DIR + "/folders.json", "w") as f:
+    json.dump(folder_structure, f, indent=4)
+
+  # import pdb; pdb.set_trace()
   export_metadata()
   logger.info(f' {now()}: Finished')
   print("OK")
