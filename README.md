@@ -1,10 +1,12 @@
 # CubeDude
 
+**Project abandoned and only available here for accessability. For an updated version, head over to [cubedude_js](https://github.com/Messerblatt/cubedude_js)** 
+
 A simple .mp3-Player in Javascript.
 
-Check out the [deployed version on Vercel](https://cubedude.vercel.app/)
+Demo available at [Vercel deployment](https://cubedude.vercel.app/)
 
-I wanted a MP3-Player that is ubiquitous, extensible and free of ads and registration-hazzles. So I created Cubedude. It's a simple audioplayer that displays a realtime-time vizualization of the `AudioCtx`, next to APEv2-Metadata of the song being played.
+I needed an MP3-Player that is ubiquitous, extensible and free of ads and registration-hazzles. So I created Cubedude. It's a simple audioplayer that displays a realtime-time vizualization of the `AudioCtx`, next to APEv2-Metadata of the song being played.
 
 ## Special Effects
 - **Flanger**: Press `f` to enable/disable
